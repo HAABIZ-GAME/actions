@@ -14,11 +14,8 @@ jobs:
  process-docker-image:
   runs-on: ubuntu-latest
   steps:
-   - name: Checkout repository
-     uses: actions/checkout@v4
-
    - name: Call API with Docker Image
-     uses: ./
+     uses: github.com/HAABIZ-GAME/actions@main
      with:
       docker-image: ${{ github.event.inputs.docker-image || 'my-registry/game-server:latest' }}
       api-endpoint: ${{ secrets.API_ENDPOINT }}
