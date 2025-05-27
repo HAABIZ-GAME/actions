@@ -1,5 +1,8 @@
 name: "Docker Image API Caller"
 description: "Receives a Docker image and calls an external API"
+branding:
+ icon: "send"
+ color: "blue"
 inputs:
  docker-image:
   description: "The Docker image to process"
