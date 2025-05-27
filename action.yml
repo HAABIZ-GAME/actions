@@ -1,0 +1,25 @@
+name: "Docker Image API Caller"
+description: "Receives a Docker image and calls an external API"
+inputs:
+ docker-image:
+  description: "The Docker image to process"
+  required: true
+ api-endpoint:
+  description: "The external API endpoint to call"
+  required: true
+ api-key:
+  description: "API key for authentication"
+  required: true
+runs:
+ using: "composite"
+ steps:
+  - uses: actions/checkout@v4
+  - name: Call External API
+    shell: bash
+    run: |
+     echo "Processing Docker image: ${{ inputs.docker-image }}"
+     curl -X POST \
+       -H "X-Api-Key: ${{ inputs.api-key }}" \
+       -H "Content-Type: application/json" \
+       -d "{\"name\": \"game-server\", \"image\": \"${{ inputs.docker-image }}\"}" \
+       "${{ inputs.api-endpoint }}"
