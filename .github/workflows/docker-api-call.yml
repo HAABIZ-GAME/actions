@@ -15,7 +15,7 @@ jobs:
   runs-on: ubuntu-latest
   steps:
    - name: Call API with Docker Image
-     uses: github.com/HAABIZ-GAME/actions@main
+     uses: HAABIZ-GAME/actions@main
      with:
       docker-image: ${{ github.event.inputs.docker-image || 'my-registry/game-server:latest' }}
       api-endpoint: ${{ secrets.API_ENDPOINT }}
