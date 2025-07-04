@@ -20,3 +20,4 @@ jobs:
       docker-image: ${{ github.event.inputs.docker-image || 'my-registry/game-server:latest' }}
       api-endpoint: ${{ secrets.API_ENDPOINT }}
       api-key: ${{ secrets.API_KEY }}
+      name: ${{ github.event.inputs.name || 'game-server' }}

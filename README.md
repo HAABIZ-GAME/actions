@@ -29,6 +29,7 @@ jobs:
       docker-image: "my-registry/my-image:latest"
       api-endpoint: "https://api.example.com/process-image"
       api-key: ${{ secrets.API_KEY }}
+      name: game-server
 ```
 
 ## Example

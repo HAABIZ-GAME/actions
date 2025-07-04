@@ -3,20 +3,41 @@ name: External Docker Image API Call
 on:
  push:
   branches: [main]
+  tags:
+   - "v*"
+ pull_request:
+  branches: [main]
+ release:
+  types: [published]
  workflow_dispatch:
   inputs:
    docker-image:
     description: "Docker image to process"
     required: true
     type: string
+   name:
+    description: "Service name (default: game-server)"
+    required: false
+    type: string
+    default: "game-server"
+   environment:
+    description: "Environment to deploy to"
+    required: true
+    type: choice
+    options:
+     - production
+     - staging
+     - development
+    default: "staging"
 
 jobs:
  process-docker-image:
   runs-on: ubuntu-latest
   steps:
    - name: Call API with Docker Image
-     uses: xkamail/actions/docker-api-caller@main # Updated path to the action
+     uses: xkamail/actions/docker-api-caller@main
      with:
       docker-image: ${{ github.event.inputs.docker-image || 'my-registry/game-server:latest' }}
+      name: ${{ github.event.inputs.name || 'game-server' }}
       api-endpoint: ${{ secrets.API_ENDPOINT }}
       api-key: ${{ secrets.API_KEY }}

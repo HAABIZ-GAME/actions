@@ -7,6 +7,10 @@ inputs:
  docker-image:
   description: "The Docker image to process"
   required: true
+ name:
+  description: "The name for the service (default: game-server)"
+  required: false
+  default: "game-server"
  api-endpoint:
   description: "The external API endpoint to call"
   required: true
@@ -20,9 +24,9 @@ runs:
   - name: Call External API
     shell: bash
     run: |
-     echo "Processing Docker image: ${{ inputs.docker-image }}"
+     echo "Processing Docker image: ${{ inputs.docker-image }} with name: ${{ inputs.name }}"
      curl -X POST \
        -H "X-Api-Key: ${{ inputs.api-key }}" \
        -H "Content-Type: application/json" \
-       -d "{\"name\": \"game-server\", \"image\": \"${{ inputs.docker-image }}\"}" \
+       -d "{\"name\": \"${{ inputs.name }}\", \"image\": \"${{ inputs.docker-image }}\"}" \
        "${{ inputs.api-endpoint }}"
